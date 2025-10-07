@@ -11,11 +11,19 @@ class Pokemon {
 
   // Method to display Pokémon info
   displayInfo() {
-    console.log(`--- ${this.name.toUpperCase()} (#${this.id}) ---`);
-    console.log(`Height: ${this.height}`);
-    console.log(`Weight: ${this.weight}`);
-    console.log(`Types: ${this.types.join(", ")}`);
-    console.log(`Sprite: ${this.sprite}`);
+    document.getElementById(
+      "pokemon-name"
+    ).innerText = `${this.name.toUpperCase()} (#${this.id})`;
+    document.getElementById("pokemon-sprite").src = this.sprite;
+    document.getElementById("pokemon-sprite").alt = this.name;
+    document.getElementById("pokemon-height").innerText = this.height;
+    document.getElementById("pokemon-weight").innerText = this.weight;
+    document.getElementById("pokemon-types").innerText += this.types.join(", ");
+    // console.log(`--- ${this.name.toUpperCase()} (#${this.id}) ---`);
+    // console.log(`Height: ${this.height}`);
+    // console.log(`Weight: ${this.weight}`);
+    // console.log(`Types: ${this.types.join(", ")}`);
+    // console.log(`Sprite: ${this.sprite}`);
   }
 }
 
@@ -63,6 +71,6 @@ class PokemonAPI {
   pikachu.displayInfo();
 
   // Get Bulbasaur
-  const bulbasaur = await api.getPokemon(1); // also works with ID
-  bulbasaur.displayInfo();
+  // const bulbasaur = await api.getPokemon(1); // also works with ID
+  // bulbasaur.displayInfo();
 })();
