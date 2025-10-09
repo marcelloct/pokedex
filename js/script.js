@@ -18,7 +18,7 @@ class Pokemon {
     document.getElementById("pokemon-sprite").alt = this.name;
     document.getElementById("pokemon-height").innerText = this.height;
     document.getElementById("pokemon-weight").innerText = this.weight;
-    document.getElementById("pokemon-types").innerText += this.types.join(", ");
+    document.getElementById("pokemon-types").innerText = this.types.join(", ");
     // console.log(`--- ${this.name.toUpperCase()} (#${this.id}) ---`);
     // console.log(`Height: ${this.height}`);
     // console.log(`Weight: ${this.weight}`);
@@ -41,11 +41,18 @@ class PokemonAPI {
           typeof nameOrId === "String" ? nameOrId.toLowerCase() : nameOrId
         }`
       );
+
       if (!response.ok) {
+        document.getElementById("error-message").innerText =
+          "Pokemon not found";
         throw new Error(`Pokémon not found: ${nameOrId}`);
+      } else {
+        document.getElementById("error-message").innerText = "";
       }
+
       const data = await response.json();
 
+      console.log(data);
       // Build a Pokemon object
       return new Pokemon(
         data.name,
@@ -62,15 +69,29 @@ class PokemonAPI {
 }
 
 // Inicialize
+document
+  .getElementById("search-button")
+  .addEventListener("click", returnPokemon);
 
-(async () => {
+async function returnPokemon() {
   const api = new PokemonAPI();
 
-  // Get Pikachu
-  const pikachu = await api.getPokemon("pikachu");
-  pikachu.displayInfo();
+  const value = document.getElementById("search-field").value;
+
+  // Get the chosen pokemon
+  const pokemon = await api.getPokemon(value);
+  pokemon.displayInfo();
 
   // Get Bulbasaur
   // const bulbasaur = await api.getPokemon(1); // also works with ID
   // bulbasaur.displayInfo();
-})();
+}
+
+// For Test
+// (async () => {
+//   const api = new PokemonAPI();
+
+//   // Get Pikachu
+//   const pokemon = await api.getPokemon("pikachu");
+//   pokemon.displayInfo();
+// })();
