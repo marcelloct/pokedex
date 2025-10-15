@@ -1,3 +1,6 @@
+// start number counter
+let searchPokemon = 1;
+
 // Pokemon class: Represents an individual Pokémon
 class Pokemon {
   constructor(name, id, height, weight, types, sprite) {
@@ -11,19 +14,18 @@ class Pokemon {
 
   // Method to display Pokémon info
   displayInfo() {
+    document.getElementById("pokemon-number").innerText = `Nº ${this.id}`;
     document.getElementById(
       "pokemon-name"
-    ).innerText = `${this.name.toUpperCase()} (#${this.id})`;
-    document.getElementById("pokemon-sprite").src = this.sprite;
-    document.getElementById("pokemon-sprite").alt = this.name;
+    ).innerText = `${this.name.toUpperCase()}`;
+    document.getElementById("pokemon-image").src = this.sprite;
+    document.getElementById("pokemon-image").alt = this.name;
     document.getElementById("pokemon-height").innerText = this.height;
     document.getElementById("pokemon-weight").innerText = this.weight;
     document.getElementById("pokemon-types").innerText = this.types.join(", ");
-    // console.log(`--- ${this.name.toUpperCase()} (#${this.id}) ---`);
-    // console.log(`Height: ${this.height}`);
-    // console.log(`Weight: ${this.weight}`);
-    // console.log(`Types: ${this.types.join(", ")}`);
-    // console.log(`Sprite: ${this.sprite}`);
+
+    document.getElementById("search-field").value = "";
+    searchPokemon = this.id;
   }
 }
 
@@ -60,7 +62,9 @@ class PokemonAPI {
         data.height,
         data.weight,
         data.types.map((t) => t.type.name),
-        data.sprites.front_default
+        data["sprites"]["versions"]["generation-v"]["black-white"]["animated"][
+          "front_default"
+        ]
       );
     } catch (error) {
       console.error(error);
@@ -81,17 +85,29 @@ async function returnPokemon() {
   // Get the chosen pokemon
   const pokemon = await api.getPokemon(value);
   pokemon.displayInfo();
-
-  // Get Bulbasaur
-  // const bulbasaur = await api.getPokemon(1); // also works with ID
-  // bulbasaur.displayInfo();
 }
 
-// For Test
-// (async () => {
-//   const api = new PokemonAPI();
+// Default result when loads the browser
+(async () => {
+  const api = new PokemonAPI();
 
-//   // Get Pikachu
-//   const pokemon = await api.getPokemon("pikachu");
-//   pokemon.displayInfo();
-// })();
+  // Get the first pokemon
+  const pokemon = await api.getPokemon(1);
+  pokemon.displayInfo();
+})();
+
+document.querySelector(".btn-prev").addEventListener("click", async () => {
+  if (searchPokemon > 1) {
+    searchPokemon -= 1;
+    const api = new PokemonAPI();
+    const pokemon = await api.getPokemon(searchPokemon);
+    pokemon.displayInfo();
+  }
+});
+
+document.querySelector(".btn-next").addEventListener("click", async () => {
+  searchPokemon += 1;
+  const api = new PokemonAPI();
+  const pokemon = await api.getPokemon(searchPokemon);
+  pokemon.displayInfo();
+});
