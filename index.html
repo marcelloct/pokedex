@@ -5,30 +5,66 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <title>Pokedex</title>
+    <link rel="icon" href="images/favicon-16x16.png" />
 
     <link rel="stylesheet" href="css/normalize.css" />
     <link rel="stylesheet" href="css/reset.css" />
     <link rel="stylesheet" href="css/style.css" />
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Oxanium:wght@200..800&display=swap"
+      rel="stylesheet"
+    />
   </head>
   <body>
-    <h2 id="pokemon-name"></h2>
+    <main>
+      <div id="pokedex-left-side">
+        <span id="pokemon-number"></span>
+        <img src="#" alt="" id="pokemon-image" />
+        <span id="pokemon-name"></span>
+      </div>
+      <div id="pokedex-right-side">
+        <div id="pokemon-info">
+          <ul>
+            <li>
+              Height:
+              <span id="pokemon-height"></span>
+            </li>
+            <li>
+              Weight:
+              <span id="pokemon-weight"></span>
+            </li>
+            <li>
+              Type(s):
+              <span id="pokemon-types"></span>
+            </li>
+          </ul>
+        </div>
+
+        <div id="up-down-buttons">
+          <button id="btn-up">&#708;</button>
+          <button id="btn-down">&#709;</button>
+        </div>
+
+        <div id="prev-next-buttons">
+          <button class="btn btn-prev">&lt; Prev</button>
+          <button class="btn btn-next">Next &gt;</button>
+        </div>
+      </div>
+    </main>
+
+    <div class="search-container">
+      <input type="text" id="search-field" placeholder="Name or Number" />
+      <button id="search-button">Search</button>
+    </div>
+
+    <span id="error-message"></span>
+
     <div id="container-sprite">
       <img id="pokemon-sprite" />
     </div>
-    <ul>
-      <li>
-        Height:
-        <span id="pokemon-height"></span>
-      </li>
-      <li>
-        Weight:
-        <span id="pokemon-weight"></span>
-      </li>
-      <li>
-        Type(s):
-        <span id="pokemon-types"></span>
-      </li>
-    </ul>
+
     <script type="text/javascript" src="js/script.js"></script>
+    <script type="text/javascript" src="js/test.js"></script>
   </body>
 </html>
