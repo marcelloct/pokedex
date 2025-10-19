@@ -16,7 +16,7 @@ main,
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  padding: 2rem 0 0 0;
+  padding-top: 3rem;
 }
 
 #pokedex-left-side {
@@ -85,20 +85,31 @@ main,
   top: 32%;
   left: 10%;
   width: 80%;
-  min-height: 160px;
+  max-height: 160px;
   background-color: #054139;
   border-radius: 4px;
   border: 2px solid #444;
   color: #f6f6f6;
   padding: 1rem;
+  overflow: auto;
+}
+
+#pokemon-info::-webkit-scrollbar {
+  display: none; /* Hides the scrollbar completely */
 }
 
 #pokemon-info ul li {
-  line-height: 1.4rem;
+  line-height: 1.5rem;
+  color: #e5e5e5;
+  font-weight: 800;
 }
 
 #pokemon-info ul li span {
   text-transform: capitalize;
+  color: #d5d5d5;
+  text-align: justify;
+  text-justify: inter-word;
+  font-weight: 500;
 }
 
 #search-field,
@@ -114,8 +125,15 @@ main,
   box-shadow: -3px 4px 0 #888, -5px 7px 0 #333;
 }
 
+#search-field:focus {
+  border: 2px solid #d0073d;
+  transition: 0.3s ease-in-out;
+}
+
 #search-button {
   margin-left: 0.5rem;
+  cursor: pointer;
+  transition: 0.3s ease-in-out;
 }
 
 #search-button:hover {
@@ -147,12 +165,18 @@ main,
   color: #f6f6f6;
   background-color: #444;
   box-shadow: -2px 3px 0 #222, -4px 6px 0 #000;
+  cursor: pointer;
+  transition: 0.3s ease-in-out;
 }
 
 .btn:active {
   background-color: #d0073d;
   box-shadow: inset -4px 4px 0 #222;
   font-size: 0.9rem;
+}
+
+.btn:hover {
+  background-color: #d0073d;
 }
 
 #up-down-buttons {
@@ -174,6 +198,13 @@ main,
   font-weight: 600;
   color: #444;
   background-color: #f6f6f6;
+  cursor: pointer;
+  transition: 0.3s ease-in-out;
+}
+
+#btn-up:hover,
+#btn-down:hover {
+  background-color: #d5d5d5;
 }
 
 #btn-up {
